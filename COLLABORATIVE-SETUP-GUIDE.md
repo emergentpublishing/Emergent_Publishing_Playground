@@ -132,9 +132,11 @@ gh auth login
 
 Guide them through:
 1. Choose GitHub.com
-2. Choose HTTPS
+2. Choose HTTPS  
 3. Authenticate with a web browser
 4. Let them know when it's successful
+
+**Important**: Make sure they authenticate with THEIR GitHub account, not emergentpublishing. They need their own account to contribute to the emergentpublishing repository.
 
 ### Help Them Get Started
 
@@ -180,7 +182,7 @@ If the user mentions they want to work on the "Emergent_Publishing_Playground" p
 ```bash
 # Help them clone the playground
 cd ~/Development
-gh repo clone cedeclaudemagic/Emergent_Publishing_Playground
+gh repo clone emergentpublishing/Emergent_Publishing_Playground
 cd Emergent_Publishing_Playground
 
 # Set up their identity for this project
@@ -202,6 +204,37 @@ Help them set up a proper project structure based on their needs:
 4. **Initialize git** and connect to GitHub if they want
 
 Always customize the setup based on their specific project needs!
+
+### 🚨 Troubleshooting Push Permission Issues
+
+If the collaborator gets "Permission denied" errors when trying to push:
+
+1. **Check their GitHub authentication**:
+   ```bash
+   gh auth status
+   ```
+   Should show THEIR GitHub username, not emergentpublishing.
+
+2. **Make sure they're added as a collaborator**:
+   - Tell them: "You need to be added as a collaborator to this repository"
+   - Project owner should go to: https://github.com/emergentpublishing/Emergent_Publishing_Playground/settings/access
+   - Add their GitHub username as a collaborator
+
+3. **If still having issues, use branches and PRs**:
+   ```bash
+   # Create a branch for their work
+   git checkout -b feature/their-username-changes
+   
+   # Make changes and commit
+   git add .
+   git commit -m "Description of changes"
+   
+   # Push their branch (this usually works even without direct push access)
+   git push -u origin feature/their-username-changes
+   
+   # Create PR
+   gh pr create --title "Title" --body "Description"
+   ```
 
 ### 📋 Workflow Policies (From Proven Practices)
 
